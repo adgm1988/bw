@@ -15,8 +15,8 @@
                 Cancelar
               </button>
             </a>
-            <a href="{{url('/sales/create')}}">
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+           <a href="#">
+              <button type="submit"  form="sale_form" class="btn btn-success" >
                 Guardar
               </button>
             </a>
@@ -29,46 +29,27 @@
     <section class="content">
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="card">
             <div class="card-body">
-              <form id="sale_form">
+              <form id="sale_form" action="{{url('/sales/store')}}" method="post">
+                {{csrf_field()}}
                 <div class="row">
                    <div class="col-6">
                      <label for="id_client">Cliente:</label>
-                     <input class="form-control" name="id_client" id="id_client" type="text">
+                     <select class="form-control" name="id_client" id="id_client">
+                     @foreach($clients as $client)
+                      <option value="{{ $client->id_client }}">{{$client->name}}</option>
+                     @endforeach
+                     </select>
                     </div>  
                     <div class="col-6">
-                     <label for="id_client">Fecha:</label>
-                     <input class="form-control" name="id_client" id="date" type="date" value="{{ date('Y-m-d') }}">
+                     <label for="date">Fecha:</label>
+                     <input class="form-control" name="date" id="date" type="date" value="{{ date('Y-m-d') }}">
                    </div>
                  </div>
                  <div class="row">
                   <div class="col-12">
-                     <label for="note">Nota:</label>
-                     <textarea class="form-control" name="note" id="note" cols="30" rows="4"></textarea>
-                   </div>
-                 </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <form id="sale_form">
-                <div class="row">
-                   <div class="col-6">
-                     <label for="id_client">Cliente:</label>
-                     <input class="form-control" name="id_client" id="id_client" type="text">
-
-                     <label for="id_client">Fecha:</label>
-                     <input class="form-control" name="id_client" id="date" type="date" value="{{ date('Y-m-d') }}">
-                   </div>
-                  <div class="col-6">
                      <label for="note">Nota:</label>
                      <textarea class="form-control" name="note" id="note" cols="30" rows="4"></textarea>
                    </div>

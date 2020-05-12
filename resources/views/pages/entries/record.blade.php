@@ -38,7 +38,7 @@
           <meta name="csrf-token" content="{{ csrf_token() }}"> <!--LO PONGO ASI POR SER EN AJAX-->
           <div class="form-group row">
             <div class="col-3" >
-              <label for="weight">Folio:</label>
+              <label for="id_productroduct">Folio:</label>
               <input type="text" class="form-control hide" id="id_product" name="id_product" disabled>
             </div>
             <div class="col-9">

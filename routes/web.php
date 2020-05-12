@@ -34,6 +34,9 @@ Route::post('clients/store','ClientController@store');
 Route::get('sales','SaleController@index');
 Route::get('sales/create','SaleController@create');
 Route::post('sales/store','SaleController@store');
+Route::get('sales/{sale}','SaleController@show');
+Route::post('sales/getDetailOptions','SaleController@getDetailOptions');
+
 
 Route::get('inventories','InventoryController@index');
 
