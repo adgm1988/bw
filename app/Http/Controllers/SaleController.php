@@ -124,13 +124,13 @@ class SaleController extends Controller
 
         $id_inventory = $request->id_inventory;
         $id_sale = $request->id_sale;
-        $price = $request->price;
+        $sale_price = $request->sale_price;
 
 
         $sale_detail = new SaleDetail;
         $sale_detail->id_inventory=$id_inventory;
         $sale_detail->id_sale=$id_sale;
-        $sale_detail->sale_price= $price;
+        $sale_detail->sale_price= $sale_price;
        
 
         if( $sale_detail->save()){

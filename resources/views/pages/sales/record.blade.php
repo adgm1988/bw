@@ -179,8 +179,9 @@
                         @if($product->id_product == $sale_detail->inventory->id_product)
                           <li class="list-group-item col-12 p-0">
                             <div class="row">
-                              <div class="col-7 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}} </div>
-                              <div class="col-4 ">{{$sale_detail->inventory->weight}} gr</div>
+                              <div class="col-7 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}}</div>
+                              <div class="col-2 ">{{$sale_detail->inventory->weight}} gr</div>
+                              <div class="col-2 ">$ {{$sale_detail->sale_price}}</div>
                               <div class="col-1 "><a href={{ url('sales/deleteSaleDetail/'. $sale_detail->id_sale_details)}}><i class="fas fa-minus-circle text-danger"></i></a></div>
                             </div>
                           </li>
@@ -296,7 +297,7 @@
 
           $.each(data, function() {
 
-              filas_opciones += "<tr style='cursor:pointer;' onclick='save_sale_detail("+this.id_inventory+")'><td>"+this.id_inventory+"</td><td class='option_row'>"+this.weight+"</td><td>$ "+(this.weight*price/1000).toFixed(2)+"</td></tr>";
+              filas_opciones += "<tr style='cursor:pointer;' onclick='save_sale_detail("+this.id_inventory+","+this.weight*price/1000+")'><td>"+this.id_inventory+"</td><td class='option_row'>"+this.weight+"</td><td>$ "+(this.weight*price/1000).toFixed(2)+"</td></tr>";
           });
 
           $('#inventory_options').append(filas_opciones);       
@@ -312,17 +313,16 @@
     /***EMPIEZA EL SAVE DE DETALLE**/
     
 
-    var save_sale_detail = function(id_inventory){
+    var save_sale_detail = function(id_inventory,sale_price){
 
       var price = $('#precio_modal').text();
-
       var id_sale = {{$sale->id_sale}};
 
       $.ajax({
        dataType: 'json',
        type:'POST',
        url:'{{ url("sales/saveSaleDetail") }}',
-       data:{id_inventory:id_inventory, id_sale:id_sale, price:price},
+       data:{id_inventory:id_inventory, id_sale:id_sale, sale_price:sale_price},
 
        success:function(data){
 
