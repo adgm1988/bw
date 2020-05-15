@@ -31,6 +31,7 @@
               <table id="listado" class="display table table-bordered table-striped" width="100%">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>id</th>
                     <th>Fecha</th>
                     <th>Cliente</th>
@@ -42,6 +43,9 @@
                 <tbody>
                 @foreach($sales as $sale)
                 <tr>
+                  <td> 
+                    <a href="{{url('sales/'.$sale->id_sale)}}"><i class="fas fa-eye"></i></a>
+                  </td>
                   <td>{{$sale->id_sale}}</td>
                   <td>{{$sale->date}}</td>
                   <td>{{$sale->client->name}}</td>

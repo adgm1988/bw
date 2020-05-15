@@ -118,4 +118,34 @@ class SaleController extends Controller
         $inventories = Inventory::where('id_product',$id_product)->orderBy('id_inventory','asc')->get();
         return $inventories;
     }
+
+    public function ajaxSaleDetailStore(Request $request)
+    {
+
+        $id_inventory = $request->id_inventory;
+        $id_sale = $request->id_sale;
+        $price = $request->price;
+
+
+        $sale_detail = new SaleDetail;
+        $sale_detail->id_inventory=$id_inventory;
+        $sale_detail->id_sale=$id_sale;
+        $sale_detail->sale_price= $price;
+       
+
+        if( $sale_detail->save()){
+                return response()->json(["response" =>true,"sale_detail"=>$sale_detail]);
+              }else{
+                return response()->json(["response" =>false,"sale_detail"=>$sale_detail]);
+            }
+    }
+
+    public function deleteSaleDetail($saledetail)
+    {
+
+        $sale_detail = SaleDetail::find($saledetail);
+        $sale_detail->delete();
+        return back(); 
+        
+    }
 }

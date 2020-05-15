@@ -44,7 +44,6 @@
                 <tr>
                   <td>
                     <a href="{{url('entries/'.$entry->id_entry)}}"><i class="fas fa-eye"></i></a>
-                    
                   </td>
                   <td>{{$entry->id_entry}}</td>
                   <td>{{$entry->date}}</td>

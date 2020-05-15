@@ -30,7 +30,14 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="titulo_modal"></h4>
+        <div class="row" style="width:100%">
+          <div class="col-6">
+            <h4 class="modal-title" id="titulo_modal"></h4>
+          </div>
+          <div class="col-6">
+            <h4 class id="precio_modal"></h4>
+          </div>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
@@ -38,10 +45,10 @@
           <meta name="csrf-token" content="{{ csrf_token() }}"> <!--LO PONGO ASI POR SER EN AJAX-->
           <div class="form-group row mb-0">
             <div class="col-2" >
-              <label for="id_inventory">Venta:</label>
+              <label for="id_sale">Venta:</label>
             </div>
             <div class="col-5" >
-              <label for="id_inventory">Peso:</label>
+              <label for="weight">Peso:</label>
             </div>
           </div>
           <div class="form-group row">
@@ -51,9 +58,6 @@
             </div>
             <div class="col-5">
               <input type="number" class="form-control" id="weight" name="weight" onkeyup="actualizar_lista()" >
-            </div>
-            <div class="col-5">
-              <input type="button" class=" form-control btn-info" value="Buscar" >
             </div>
           </div>
           <div class="form-group row">
@@ -65,6 +69,7 @@
               <tr>
                 <th>Inventario</th>
                 <th>Peso</th>
+                <th>Precio</th>
               </tr>
               </thead>
               <tbody id="inventory_options">
@@ -145,7 +150,7 @@
                 <label>Productos</label>
                 <div class="row">
                   @foreach($products as $product)
-                  <div class="btn btn-danger products m-2 col-5" data-id_product="{{$product->id_product}}" data-product="{{$product->product}}" data-category="{{$product->id_product_category}}" style="width:100%">{{$product->product}}</div>
+                  <div class="btn btn-danger products m-2 col-5" data-id_product="{{$product->id_product}}" data-product="{{$product->product}}"  data-price="{{$product->price}}" data-category="{{$product->id_product_category}}" style="width:100%">{{$product->product}}</div>
                 @endforeach
                 </div>
               </div>
@@ -174,8 +179,9 @@
                         @if($product->id_product == $sale_detail->inventory->id_product)
                           <li class="list-group-item col-12 p-0">
                             <div class="row">
-                              <div class="col-9 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}} </div>
-                              <div class="col-3 ">{{$sale_detail->inventory->weight}} gr</div>
+                              <div class="col-7 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}} </div>
+                              <div class="col-4 ">{{$sale_detail->inventory->weight}} gr</div>
+                              <div class="col-1 "><a href={{ url('sales/deleteSaleDetail/'. $sale_detail->id_sale_details)}}><i class="fas fa-minus-circle text-danger"></i></a></div>
                             </div>
                           </li>
                         @endif
@@ -217,47 +223,62 @@
 
     var ocultar_productos = function(id_category){
       if(id_category==0){
-        products.each(function(){
-          $(this).show();
-        })
-      }else{
-        products.each(function(){
-          if($(this).data('category')!=id_category){
-            $(this).hide();
+            products.each(function(){
+              $(this).show();
+            })
           }else{
-            $(this).show();
+            products.each(function(){
+              if($(this).data('category')!=id_category){
+                $(this).hide();
+              }else{
+                $(this).show();
+              }
+            });
           }
-        });
-      }
-    }
+        }
 
 
-    var actualizar_lista = function(){
-       var weight = $("input[name=weight]").val();
-       var opciones = $(".option_row");
 
-       opciones.each(function(){
-          if((this.innerHTML*1)> (1.1*weight) || (this.innerHTML*1)< (.9*weight)){
-            $(this).parent().hide();
-          }else{
-            $(this).parent().show();
-          }
-        
-       })
-    };
+        var actualizar_lista = function(){
+         var weight = $("input[name=weight]").val();
+         var opciones = $(".option_row");
+         
+
+         if (weight == 0){
+
+          opciones.each(function(){
+             $(this).parent().show();
+           });
+
+         }else{
+
+           opciones.each(function(){
+
+                if(((this.innerHTML*1)> (1.1*weight)) || ((this.innerHTML*1)< (.9*weight))){
+                  $(this).parent().hide();
+                }else{
+                  $(this).parent().show();
+                }
+          });
 
 
-    $.ajaxSetup({
+       }
+     }
+
+
+     $.ajaxSetup({
       headers: {  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
 
-    products.click(function(){
+     products.click(function(){
       $('#inventory_options').empty();
       $('#id_product').val($(this).data('id_product'));
       $('#titulo_modal').text($(this).data('product'));
+      $('#precio_modal').text($(this).data('price'));
 
        var id_product = $(this).data('id_product');
+       var price = $(this).data('price');
 
 
       $.ajax({
@@ -275,7 +296,7 @@
 
           $.each(data, function() {
 
-              filas_opciones += "<tr><td>"+this.id_inventory+"</td><td class='option_row'>"+this.weight+"</td></tr>";
+              filas_opciones += "<tr style='cursor:pointer;' onclick='save_sale_detail("+this.id_inventory+")'><td>"+this.id_inventory+"</td><td class='option_row'>"+this.weight+"</td><td>$ "+(this.weight*price/1000).toFixed(2)+"</td></tr>";
           });
 
           $('#inventory_options').append(filas_opciones);       
@@ -291,16 +312,17 @@
     /***EMPIEZA EL SAVE DE DETALLE**/
     
 
-    var save_entry_detail = function(){
+    var save_sale_detail = function(id_inventory){
 
-      var id_inventory = $("input[name=id_inventory]").val();
+      var price = $('#precio_modal').text();
+
       var id_sale = {{$sale->id_sale}};
 
       $.ajax({
        dataType: 'json',
        type:'POST',
        url:'{{ url("sales/saveSaleDetail") }}',
-       data:{id_product:id_product, weight:weight, id_entry:id_entry},
+       data:{id_inventory:id_inventory, id_sale:id_sale, price:price},
 
        success:function(data){
 

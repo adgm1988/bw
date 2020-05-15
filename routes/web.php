@@ -36,6 +36,8 @@ Route::get('sales/create','SaleController@create');
 Route::post('sales/store','SaleController@store');
 Route::get('sales/{sale}','SaleController@show');
 Route::post('sales/getDetailOptions','SaleController@getDetailOptions');
+Route::post('sales/saveSaleDetail','SaleController@ajaxSaleDetailStore');
+Route::get('sales/deleteSaleDetail/{sale_detail}','SaleController@deleteSaleDetail');
 
 
 Route::get('inventories','InventoryController@index');
