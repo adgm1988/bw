@@ -23,6 +23,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::group(['middleware' => ['auth']], function() {
+    // your routes
 
 
 //MODULOS
@@ -77,7 +79,7 @@ Route::get('payment_types','PaymentTypeController@index');
 Route::post('payment_types/store','PaymentTypeController@store');
 
 
-
+});
 
 
 
