@@ -115,7 +115,10 @@ class SaleController extends Controller
     public function getDetailOptions(Request $request)
     {
         $id_product = $request->id_product;
-        $inventories = Inventory::where('id_product',$id_product)->orderBy('id_inventory','asc')->get();
+        $inventories = Inventory::where('id_product',$id_product)
+            ->whereRaw('id_inventory NOT IN (SELECT id_inventory FROM sale_details)')
+            ->orderBy('id_inventory','asc')->get();
+
         return $inventories;
     }
 
