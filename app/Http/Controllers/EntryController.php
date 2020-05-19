@@ -33,7 +33,12 @@ class EntryController extends Controller
     public function create()
     {
         $entry = DB::table('entries')->orderBy('id_entry', 'desc')->first();
-        $nuevo_id = $entry->id_entry + 1;
+        if($entry){
+            $nuevo_id = $entry->id_entry + 1;
+        }else{
+            $nnuevo_id = 1;
+        }
+
         return view('pages.entries.form',compact('nuevo_id'));
     }
 
