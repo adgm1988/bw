@@ -7,7 +7,7 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Entradas</h1>
+        <h1>Venta</h1>
       </div>
       <div class="col-sm-6 text-right">
         <a href="{{url('sales')}}">
@@ -120,11 +120,11 @@
           <div class="row">
             <div class="col-6">
               <label for="date">Peso:</label>
-              <h3>1,395.34 gr</h3>
+              <h3>{{ $total_weight }} gr</h3>
             </div>
             <div class="col-6">
               <label for="date">Subtotal:</label>
-              <h3>$297.24</h3>
+              <h3>${{ $sale->sale_details->sum('sale_price') }}</h3>
             </div>
           </div>
         </div>

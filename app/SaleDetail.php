@@ -13,4 +13,10 @@ class SaleDetail extends Model
     {
         return $this->belongsTo('App\Inventory','id_inventory','id_inventory');
     }
+
+   public function weight()
+   {
+   		return $this->inventory->weight;
+   }
+
 }

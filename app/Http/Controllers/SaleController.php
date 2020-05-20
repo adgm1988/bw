@@ -75,7 +75,12 @@ class SaleController extends Controller
         $product_categories = ProductCategory::all();
         $products = Product::all();
 
-        return view('pages.sales.record', compact('sale','product_categories','products','sale_details','products_detail','products'));
+        $total_weight = DB::table('sale_details')
+        ->where('sale_details.id_sale','=',$sale->id_sale)
+        ->join('inventories','sale_details.id_inventory','inventories.id_inventory')
+        ->sum('inventories.weight');
+
+        return view('pages.sales.record', compact('sale','product_categories','products','sale_details','products_detail','products','total_weight'));
     }
 
     /**

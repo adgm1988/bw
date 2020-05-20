@@ -15,4 +15,9 @@ class Sale extends Model
         return $this->belongsTo('App\Client','id_client','id_client');
     }
 
+    public function sale_details()
+    {
+    	return $this->hasMany('App\SaleDetail', 'id_sale', 'id_sale');
+    }
+
 }
