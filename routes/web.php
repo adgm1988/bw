@@ -64,6 +64,7 @@ Route::get('sale_details','SaleDetailController@index');
 
 Route::get('adjust_details','AdjustDetailController@index');
 Route::post('adjust_details/store/{id_inventory}','AdjustDetailController@store');
+Route::get('adjust_details/delete/{adjustDetail}','AdjustDetailController@destroy');
 
 Route::get('payments','PaymentController@index');
 

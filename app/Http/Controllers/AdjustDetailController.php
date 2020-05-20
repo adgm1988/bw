@@ -93,6 +93,7 @@ class AdjustDetailController extends Controller
      */
     public function destroy(AdjustDetail $adjustDetail)
     {
-        //
+        $adjustDetail->delete();
+        return redirect ('adjust_details');
     }
 }

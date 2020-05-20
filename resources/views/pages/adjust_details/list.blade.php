@@ -30,6 +30,7 @@
               <table id="listado" class="display table table-bordered table-striped" width=100%>
                 <thead>
                   <tr>
+                    <th></th>
                     <th>id</th>
                     <th>Ajuste</th>
                     <th>Inventario</th>
@@ -42,6 +43,9 @@
                 <tbody>
                 @foreach($adjust_details as $adjust_details)
                 <tr>
+                  <td> 
+                    <a href="{{url('adjust_details/delete/'.$adjust_details->id_adjust_detail)}}"><i class="fas fa-trash"></i></a>
+                  </td>
                   <td>{{$adjust_details->id_adjust_detail}}</td>
                   <td>{{$adjust_details->id_adjust}}</td>
                   <td>{{$adjust_details->inventory->id_inventory}} - {{$adjust_details->inventory->product->product}} - {{$adjust_details->inventory->weight}}gr</td>
