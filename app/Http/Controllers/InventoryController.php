@@ -15,10 +15,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = DB::table('inventories')
-                    ->whereRaw('id_inventory NOT IN (SELECT id_inventory FROM sale_details)')
-                    ->get();
-                    dd($inventories);
+        $inventories = Inventory::all();
         return view('pages.inventories.list', compact('inventories'));
     }
 
