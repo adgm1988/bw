@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Inventory;
 use Illuminate\Http\Request;
+use DB;
 
 class InventoryController extends Controller
 {
@@ -14,8 +15,10 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::all();
-
+        $inventories = DB::table('inventories')
+                    ->whereRaw('id_inventory NOT IN (SELECT id_inventory FROM sale_details)')
+                    ->get();
+                    dd($inventories);
         return view('pages.inventories.list', compact('inventories'));
     }
 

@@ -179,9 +179,9 @@
                         @if($product->id_product == $sale_detail->inventory->id_product)
                           <li class="list-group-item col-12 p-0">
                             <div class="row">
-                              <div class="col-7 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}}</div>
-                              <div class="col-2 ">{{$sale_detail->inventory->weight}} gr</div>
-                              <div class="col-2 ">$ {{$sale_detail->sale_price}}</div>
+                              <div class="col-5 pl-5">00{{$sale_detail->inventory->id_inventory}} - {{$sale_detail->inventory->product->product}}</div>
+                              <div class="col-3 ">{{$sale_detail->inventory->weight}} gr</div>
+                              <div class="col-3 ">$ {{$sale_detail->sale_price}}</div>
                               <div class="col-1 "><a href={{ url('sales/deleteSaleDetail/'. $sale_detail->id_sale_details)}}><i class="fas fa-minus-circle text-danger"></i></a></div>
                             </div>
                           </li>
