@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use SaleDetail;
+use App\SaleDetail;
 
 class Inventory extends Model
 {
@@ -14,7 +14,17 @@ class Inventory extends Model
 
     public function sale_detail()
     {
-        $id_sale_details = SaleDetail::where('id_inventory',$this->id_invenotry);
+        $id_sale_details = SaleDetail::where('id_inventory',$this->id_inventory);
         return($id_sale_details);
+    }
+
+    public function sale_details()
+    {
+        return $this->belongsTo('App\SaleDetail','id_inventory','id_inventory');
+    }
+
+    public function available()
+    {
+
     }
 }
