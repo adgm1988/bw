@@ -49,6 +49,7 @@ Route::get('entries/create','EntryController@create');
 Route::post('entries/store','EntryController@store');
 Route::get('entries/{entry}','EntryController@show');
 Route::post('entries/saveEntryDetail','EntryController@ajaxEntryDetailStore');
+Route::get('entries/deleteEntryDetail/{entry_detail}','EntryController@deleteEntryDetail');
 
 
 Route::get('adjusts','AdjustController@index');

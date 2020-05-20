@@ -77,11 +77,15 @@ class EntryController extends Controller
         
         $products_detail = DB::table('products')
                     ->whereIn('id_product', $id_products)->get(); 
+        $total_weight = DB::table('entry_details')
+                    ->where('id_entry',$entry->id_entry)
+                    ->join('inventories','inventories.id_inventory','entry_details.id_inventory')
+                    ->sum('inventories.weight');
 
         $product_categories = ProductCategory::all();
         $products = Product::all();
 
-        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products'));
+        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight'));
     }
 
     /**
@@ -143,6 +147,16 @@ class EntryController extends Controller
                 return response()->json(["response" =>false]);
             }
         }
+
+
+    public function deleteentryDetail($entrydetail)
+    {
+
+        $entry_detail = EntryDetail::find($entrydetail);
+        $entry_detail->delete();
+        return back(); 
+        
+    }
 
         
 }
