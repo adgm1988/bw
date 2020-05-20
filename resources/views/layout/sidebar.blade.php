@@ -46,6 +46,7 @@
               </p>
             </a>
           </li>
+          <!--
           <li class="nav-item">
             <a href="{{ url('adjusts') }}" class="nav-link">
               <i class="nav-icon fas fa-sliders-h"></i>
@@ -54,6 +55,7 @@
               </p>
             </a>
           </li>
+        -->
           <li class="nav-item">
             <a href="{{ url('inventories') }}" class="nav-link">
               <i class="nav-icon fas fa-warehouse"></i>

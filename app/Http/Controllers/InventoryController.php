@@ -15,7 +15,9 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $inventories = Inventory::doesnthave('sale_details')->get();;
+        $inventories = Inventory::doesnthave('sale_details')
+        ->doesnthave('adjust_details')
+        ->get();
         return view('pages.inventories.list', compact('inventories'));
     }
 

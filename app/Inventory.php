@@ -4,9 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\SaleDetail;
+use App\AdjustDetail;
 
 class Inventory extends Model
 {
+
+    protected $primaryKey = 'id_inventory';
+
     public function product()
     {
         return $this->belongsTo('App\Product','id_product','id_product');
@@ -23,8 +27,8 @@ class Inventory extends Model
         return $this->belongsTo('App\SaleDetail','id_inventory','id_inventory');
     }
 
-    public function available()
+    public function adjust_details()
     {
-
+        return $this->belongsTo('App\AdjustDetail','id_inventory','id_inventory');
     }
 }

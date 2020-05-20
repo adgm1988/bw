@@ -35,9 +35,20 @@ class AdjustDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_inventory)
     {
-        //
+
+
+        $adjust_detail = new AdjustDetail;
+        $adjust_detail->id_adjust = 1;
+        $adjust_detail->id_inventory = $id_inventory;
+        $adjust_detail->reason = $request->reason;
+        $adjust_detail->note = $request->note;
+
+        $adjust_detail->save();
+
+        return redirect('inventories');
+
     }
 
     /**

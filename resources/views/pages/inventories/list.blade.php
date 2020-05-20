@@ -30,6 +30,7 @@
               <table id="listado" class="display table table-bordered table-striped" width="100%">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>id</th>
                     <th>Producto</th>
                     <th>Peso (gr)</th>
@@ -41,6 +42,9 @@
                 <tbody>
                 @foreach($inventories as $inventory)
                 <tr>
+                  <td> 
+                    <a href="{{url('adjusts/create/'.$inventory->id_inventory)}}"><i class="fas fa-tools"></i></a>
+                  </td>
                   <td>{{$inventory->id_inventory}}</td>
                   <td>{{$inventory->product->product}}</td>
                   <td>{{$inventory->weight}}</td>

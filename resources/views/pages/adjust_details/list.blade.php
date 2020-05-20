@@ -27,13 +27,14 @@
           <div class="card">
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="listado" class="display table table-bordered table-striped"vwidth=100%>
+              <table id="listado" class="display table table-bordered table-striped" width=100%>
                 <thead>
                   <tr>
                     <th>id</th>
                     <th>Ajuste</th>
                     <th>Inventario</th>
-                    <th>Cantidad</th>
+                    <th>Razón</th>
+                    <th>Nota</th>
                     <th>Creación</th>
                     <th>Edición</th>
                   </tr>
@@ -44,7 +45,8 @@
                   <td>{{$adjust_details->id_adjust_detail}}</td>
                   <td>{{$adjust_details->id_adjust}}</td>
                   <td>{{$adjust_details->inventory->id_inventory}} - {{$adjust_details->inventory->product->product}} - {{$adjust_details->inventory->weight}}gr</td>
-                  <td>{{$adjust_details->quantity}}</td>
+                  <td>{{$adjust_details->reason}}</td>
+                  <td>{{$adjust_details->note}}</td>
                   <td>{{$adjust_details->created_at}}</td>
                   <td>{{$adjust_details->updated_at}}</td>
                 </tr>

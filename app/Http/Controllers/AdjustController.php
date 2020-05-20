@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Adjust;
+use App\Inventory;
 use Illuminate\Http\Request;
 
 class AdjustController extends Controller
@@ -15,8 +16,9 @@ class AdjustController extends Controller
     public function index()
     {
         $adjusts = Adjust::all();
-
         return view('pages.adjusts.list', compact('adjusts'));
+        
+
     }
 
     /**
@@ -24,9 +26,11 @@ class AdjustController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_inventory)
     {
-        //
+        $inventory = Inventory::find($id_inventory);
+        return view('pages.adjusts.form', compact('inventory'));
+
     }
 
     /**

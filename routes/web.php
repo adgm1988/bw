@@ -53,6 +53,7 @@ Route::get('entries/deleteEntryDetail/{entry_detail}','EntryController@deleteEnt
 
 
 Route::get('adjusts','AdjustController@index');
+Route::get('adjusts/create/{id_inventory}','AdjustController@create');
 
 
 //HISTORIALES
@@ -62,6 +63,7 @@ Route::get('entry_details','EntryDetailController@index');
 Route::get('sale_details','SaleDetailController@index');
 
 Route::get('adjust_details','AdjustDetailController@index');
+Route::post('adjust_details/store/{id_inventory}','AdjustDetailController@store');
 
 Route::get('payments','PaymentController@index');
 
