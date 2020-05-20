@@ -16,6 +16,11 @@
           </button>
         </a>
         <a href="#">
+          <button  class="btn btn-info btn-submit" id="agregar_pagos">
+            Agregar Pagos
+          </button>
+        </a>
+        <a href="#">
           <button type="submit"  form="sale_form" class="btn btn-success btn-submit" >
             Guardar
           </button>
@@ -25,7 +30,7 @@
   </div><!-- /.container-fluid -->
 </section>
 
-<!-- Modal agregar-->
+<!-- Modal agregar producto-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -89,6 +94,61 @@
   </div>
 </div>
 
+<!-- Modal agregar pago-->
+<div class="modal fade" id="modal_pago" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="row" style="width:100%">
+          <div class="col-6">
+            <h4 class="modal-title" id="titulo_modal"></h4>
+          </div>
+          <div class="col-6">
+            <h4 class id="precio_modal"></h4>
+          </div>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <meta name="csrf-token" content="{{ csrf_token() }}"> <!--LO PONGO ASI POR SER EN AJAX-->
+          <div class="form-group row mb-0">
+            <div class="col-4" >
+              <label for="id_sale">Forma de pago</label>
+            </div>
+            <div class="col-4" >
+              <label for="id_sale">Fecha</label>
+            </div>
+            <div class="col-4" >
+              <label for="amount">Monto</label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-4">
+              <input type="date" class="form-control" id="date" name="date" value="{{ date('Y-m-d') }}">
+            </div>
+            <div class="col-4" >
+              <select class="form-control" name="id_payment_type" id="id_payment_type">
+                @foreach($payment_types as $payment_type)
+                  <option value="{{$payment_type->id_payment_type}}">{{$payment_type->payment_type}}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="col-4">
+              <input type="number" class="form-control" id="amount" name="amount">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" id="guardar_pago">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!-- Main content -->
 <section class="content" >
@@ -118,13 +178,34 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-6">
+            <div class="col-4">
               <label for="date">Peso:</label>
               <h3>{{ $total_weight }} gr</h3>
             </div>
-            <div class="col-6">
+            <div class="col-4">
               <label for="date">Subtotal:</label>
               <h3>${{ $sale->sale_details->sum('sale_price') }}</h3>
+            </div>
+            <div class="col-4">
+              <label for="date">Pendiente:</label>
+              <h3>${{ number_format($sale->sale_details->sum('sale_price') - $sale->payments->sum('amount'), 2, '.', ',') }}</h3>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <ul class="list-group list-group-flush">
+                @foreach($payments as $payment)
+                <li class="list-group-item col-12 p-0">
+                  <div class="row">
+                    <div class="col-5 ">{{$payment->payment_type->payment_type}}</div>
+                    <div class="col-5 ">$ {{$payment->amount}}</div>
+                    <div class="col-2 "><a href={{ url('sales/deletePayment/'. $payment->id_payment)}}><i class="fas fa-minus-circle text-danger"></i></a></div>
+                  </div>
+                </li>
+                @endforeach
+
+              </ul>
             </div>
           </div>
         </div>
@@ -341,6 +422,36 @@
   /**TERMINA SAVE DE DETALLE**/
 
 
+//*Registrar pagos*/
+$('#agregar_pagos').click(function(){
+  $('#modal_pago').modal('show');
+});
+
+$('#guardar_pago').click(function(){
+  var id_sale = {{$sale->id_sale}};
+  var amount =  $("input[name=amount]").val();
+  var date =  $("input[name=date]").val();
+  var id_payment_type = $( "select#id_payment_type option:checked" ).val();
+
+  $.ajax({
+       dataType: 'json',
+       type:'POST',
+       url:'{{ url("sales/savePayment") }}',
+       data:{id_sale:id_sale, amount:amount, date:date, id_payment_type: id_payment_type},
+
+       success:function(data){
+
+        if(!data.response){
+          alert('Error al guardar');
+        }else{
+          location.reload();
+        }
+      }
+
+    });
+
+
+})
 
   </script>
 

@@ -7,6 +7,8 @@ use App\Client;
 use App\SaleDetail;
 use App\ProductCategory;
 use App\Product;
+use App\PaymentType;
+use App\Payment;
 use App\Inventory;
 use Illuminate\Http\Request;
 use DB;
@@ -74,13 +76,17 @@ class SaleController extends Controller
 
         $product_categories = ProductCategory::all();
         $products = Product::all();
+        $payment_types = PaymentType::all();
+
+        $payments = Payment::where('id_sale',$sale->id_sale)->get();
 
         $total_weight = DB::table('sale_details')
         ->where('sale_details.id_sale','=',$sale->id_sale)
         ->join('inventories','sale_details.id_inventory','inventories.id_inventory')
         ->sum('inventories.weight');
 
-        return view('pages.sales.record', compact('sale','product_categories','products','sale_details','products_detail','products','total_weight'));
+
+        return view('pages.sales.record', compact('sale','product_categories','products','sale_details','products_detail','products','total_weight','payment_types','payments'));
     }
 
     /**
@@ -156,5 +162,31 @@ class SaleController extends Controller
         $sale_detail->delete();
         return back(); 
         
+    }
+
+    public function deletePayment($payment)
+    {
+
+        $payment = Payment::find($payment);
+        $payment->delete();
+        return back();
+        
+    }
+
+    public function ajaxPaymentStore(Request $request)
+    {
+
+        $payment = new Payment;
+        $payment->id_sale=$request->id_sale;
+        $payment->amount = $request->amount;
+        $payment->date = $request->date;
+        $payment->id_payment_type=$request->id_payment_type;
+       
+
+        if( $payment->save()){
+                return response()->json(["response" =>true,"payment"=>$payment]);
+              }else{
+                return response()->json(["response" =>false,"payment"=>$payment]);
+            }
     }
 }

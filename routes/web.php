@@ -40,6 +40,8 @@ Route::get('sales/{sale}','SaleController@show');
 Route::post('sales/getDetailOptions','SaleController@getDetailOptions');
 Route::post('sales/saveSaleDetail','SaleController@ajaxSaleDetailStore');
 Route::get('sales/deleteSaleDetail/{sale_detail}','SaleController@deleteSaleDetail');
+Route::get('sales/deletePayment/{payment}','SaleController@deletePayment');
+Route::post('sales/savePayment','SaleController@ajaxPaymentStore');
 
 
 Route::get('inventories','InventoryController@index');

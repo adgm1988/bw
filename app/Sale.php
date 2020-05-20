@@ -20,4 +20,11 @@ class Sale extends Model
     	return $this->hasMany('App\SaleDetail', 'id_sale', 'id_sale');
     }
 
+    public function payments()
+    {
+        return $this->hasMany('App\Payment', 'id_sale', 'id_sale');
+    }
+
+
+
 }
