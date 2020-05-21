@@ -184,11 +184,11 @@
             </div>
             <div class="col-4">
               <label for="date">Subtotal:</label>
-              <h3>${{ $sale->sale_details->sum('sale_price') }}</h3>
+              <h3>${{ number_format($sale->sale_details->sum('sale_price')) }}</h3>
             </div>
             <div class="col-4">
               <label for="date">Pendiente:</label>
-              <h3>${{ number_format($sale->sale_details->sum('sale_price') - $sale->payments->sum('amount'), 2, '.', ',') }}</h3>
+              <h3>${{ number_format($sale->sale_details->sum('sale_price') - $sale->payments->sum('amount')) }}</h3>
             </div>
           </div>
           <hr>

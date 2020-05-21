@@ -35,6 +35,7 @@
                     <th>id</th>
                     <th>Fecha</th>
                     <th>Cliente</th>
+                    <th>Monto</th>
                     <th>Nota</th>
                     <th>Creción</th>
                     <th>Edición</th>
@@ -49,6 +50,7 @@
                   <td>{{$sale->id_sale}}</td>
                   <td>{{$sale->date}}</td>
                   <td>{{$sale->client->name}}</td>
+                  <td>$ {{number_format($sale->sale_details->sum('sale_price'))}}</td>
                   <td>{{$sale->client->note}}</td>
                   <td>{{$sale->created_at}}</td>
                   <td>{{$sale->updated_at}}</td>
