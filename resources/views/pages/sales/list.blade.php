@@ -50,7 +50,7 @@
                   <td>{{$sale->id_sale}}</td>
                   <td>{{$sale->date}}</td>
                   <td>{{$sale->client->name}}</td>
-                  <td>$ md{{number_format($sale->sale_details->sum('sale_price'))}}</td>
+                  <td>$ {{number_format($sale->sale_details->sum('sale_price'))}}</td>
                   <td>{{$sale->client->note}}</td>
                   <td>{{$sale->created_at}}</td>
                   <td>{{$sale->updated_at}}</td>
