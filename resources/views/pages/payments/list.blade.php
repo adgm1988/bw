@@ -43,7 +43,7 @@
                 @foreach($payments as $payment)
                 <tr>
                   <td>{{$payment->id_payment}}</td>
-                  <td>{{$payment->id_sale}}</td>
+                  <td>{{$payment->sale->id_sale}} - {{$payment->sale->client->name}} ({{$payment->sale->date}})</td>
                   <td>{{$payment->date}}</td>
                   <td>${{$payment->amount}}</td>
                   <td>{{$payment->payment_type->payment_type}}</td>

@@ -13,4 +13,7 @@ class Payment extends Model
     	return $this->hasOne('App\PaymentType','id_payment_type','id_payment_type');
     }
 
+    public function sale(){
+    	return $this->belongsTo('App\Sale','id_sale','id_sale');
+    }
 }
