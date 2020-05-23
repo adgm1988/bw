@@ -32,6 +32,7 @@
                   <tr>
                     <th>id</th>
                     <th>Venta</th>
+                    <th>Fecha</th>
                     <th>Producto</th>
                     <th>Peso</th>
                     <th>Precio</th>
@@ -44,9 +45,10 @@
                 <tr>
                   <td>{{$sale_details->id_sale_details}}</td>
                   <td>{{$sale_details->id_sale}}</td>
+                  <td>{{$sale_details->sale->date}}</td>
                   <td>{{$sale_details->inventory->product->product}}</td>
                   <td>{{$sale_details->inventory->weight}} gr</td>
-                  <td> calculado y guardado al vender</td>
+                  <td>{{$sale_details->sale_price}}</td>
                   <td>{{$sale_details->created_at}}</td>
                   <td>{{$sale_details->updated_at}}</td>
                 </tr>

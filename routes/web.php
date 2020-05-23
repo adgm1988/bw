@@ -84,6 +84,9 @@ Route::post('product_categories/store','ProductCategoryController@store');
 Route::get('payment_types','PaymentTypeController@index');
 Route::post('payment_types/store','PaymentTypeController@store');
 
+//REPORTS
+Route::get('reports','ReportController@index');
+
 
 });
 

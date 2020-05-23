@@ -15,7 +15,9 @@
   <link href="{{url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700')}}" rel="stylesheet">
   <!-- agregue el de datatables-->
   <link rel="stylesheet" href="{{url('css/datatables.css')}}">
-  
+
+  <!--cdn de highchartsz-->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
   
 
-</head>
+</head> 
