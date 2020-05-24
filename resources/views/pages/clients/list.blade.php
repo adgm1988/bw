@@ -31,6 +31,7 @@
               <table id="listado" class="display table table-bordered table-striped" width="100%">
                 <thead>
                   <tr>
+                    <th></th>
                     <th>id</th>
                     <th>Nombre</th>
                     <th>Celular</th>
@@ -45,6 +46,9 @@
                 <tbody>
                 @foreach($clients as $client)
                 <tr>
+                  <td> 
+                    <a href="{{url('clients/'.$client->id_client)}}"><i class="fas fa-eye"></i></a>
+                  </td>
                   <td>{{$client->id_client}}</td>
                   <td>{{$client->name}}</td>
                   <td>{{$client->cellphone}}</td>

@@ -22,7 +22,7 @@ class Sale extends Model
 
     public function payments()
     {
-        return $this->hasMany('App\Payment', 'id_sale', 'id_sale');
+        return $this->hasMany('App\Payment', 'id_sale');
     }
 
 

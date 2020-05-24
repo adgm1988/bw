@@ -37,7 +37,7 @@
                     <th>Cliente</th>
                     <th>Monto</th>
                     <th>Nota</th>
-                    <th>Creción</th>
+                    <th>Creación</th>
                     <th>Edición</th>
                   </tr>
                 </thead>
