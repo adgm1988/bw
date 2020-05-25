@@ -12,16 +12,6 @@ class ReportController extends Controller
 
     public function index()
     {
-    	$datas = DB::table('sale_details')
-    			->join('inventories','inventories.id_inventory','sale_details.id_inventory')
-    			->join('products','products.id_product','inventories.id_product')
-    			->join('sales','sales.id_sale','sale_details.id_sale')
-    			->select(DB::raw('DATE_FORMAT(sales.date, "%Y-%m") as month'),'products.product', DB::raw('SUM(sale_details.sale_price) as total_sales'))
-    			->groupBy('month','products.product')
-    			->orderBy('products.product','ASC')
-    			->orderBy('month','ASC')
-    			->get();
-
 
     	$months = DB::table('sale_details')
     			->join('inventories','inventories.id_inventory','sale_details.id_inventory')
@@ -39,12 +29,48 @@ class ReportController extends Controller
     			->select(DB::raw('products.product as product'))
     			->distinct()
     			->get();
+
+        // REPORTES DE VENTA POR MXN
+
+    	$datas = DB::table('sale_details')
+    			->join('inventories','inventories.id_inventory','sale_details.id_inventory')
+    			->join('products','products.id_product','inventories.id_product')
+    			->join('sales','sales.id_sale','sale_details.id_sale')
+    			->select(DB::raw('DATE_FORMAT(sales.date, "%Y-%m") as month'),'products.product', DB::raw('SUM(sale_details.sale_price) as total_sales'))
+    			->groupBy('month','products.product')
+    			->orderBy('products.product','ASC')
+    			->orderBy('month','ASC')
+    			->get();
+
+
     	$total_mensual = DB::table('sale_details')
     			->join('sales','sales.id_sale','sale_details.id_sale')
     			->select(DB::raw('DATE_FORMAT(sales.date, "%Y-%m") as month'), DB::raw('SUM(sale_details.sale_price) as total_sales'))
     			->groupBy('month')
     			->orderBy('month')
     			->get();
+
+
+        //REPORTES DE TOTALES POR KILOGRAO
+
+        $datas_kg = DB::table('sale_details')
+                ->join('inventories','inventories.id_inventory','sale_details.id_inventory')
+                ->join('products','products.id_product','inventories.id_product')
+                ->join('sales','sales.id_sale','sale_details.id_sale')
+                ->select(DB::raw('DATE_FORMAT(sales.date, "%Y-%m") as month'),'products.product', DB::raw('SUM(inventories.weight) as total_sales'))
+                ->groupBy('month','products.product')
+                ->orderBy('products.product','ASC')
+                ->orderBy('month','ASC')
+                ->get();
+        
+
+        $total_mensual_kg = DB::table('sale_details')
+                ->join('sales','sales.id_sale','sale_details.id_sale')
+                ->join('inventories','sale_details.id_inventory','inventories.id_inventory')
+                ->select(DB::raw('DATE_FORMAT(sales.date, "%Y-%m") as month'), DB::raw('SUM(inventories.weight) as total_sales'))
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
 
 
     	if (isset($_GET['d'])) {
@@ -57,7 +83,7 @@ class ReportController extends Controller
 	    	}
 	    }
 
-    	return view('pages.reports.index',compact('datas','months','products','total_mensual'));
+    	return view('pages.reports.index',compact('datas','months','products','total_mensual','datas_kg','total_mensual_kg'));
     }
 }
 
