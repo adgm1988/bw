@@ -38,6 +38,18 @@
   <script>
    document.addEventListener('DOMContentLoaded', function () {
     var monthly_sale_by_product = Highcharts.chart('monthly_sale_by_product', {
+      exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
       chart: {
         type: 'column'
       },
@@ -79,7 +91,19 @@
     });
 
     var monthly_total_sale = Highcharts.chart('monthly_total_sale', {
-      chart: {
+      exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+    chart: {
         type: 'column'
       },
       title: {
@@ -111,7 +135,19 @@
 
 
      var monthly_sale_by_product_kg = Highcharts.chart('monthly_sale_by_product_kg', {
-      chart: {
+      exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+    chart: {
         type: 'column'
       },
       title: {
@@ -152,7 +188,19 @@
     });
 
      var monthly_total_sale_kg = Highcharts.chart('monthly_total_sale_kg', {
-      chart: {
+      exporting: {
+        chartOptions: { // specific options for the exported image
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
+        },
+        fallbackToExportServer: false
+    },
+    chart: {
         type: 'column'
       },
       title: {
