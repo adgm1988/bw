@@ -139,7 +139,7 @@
             @foreach($datas_kg as $data)
               @if($data->product == $product->product)
                 @if($data->month == $month->month)
-                  @php ($val = $data->total_sales)
+                  @php ($val = $data->total_sales/1000)
                 @endif
               @endif
             @endforeach
@@ -175,7 +175,7 @@
         name: 'Venta',
         data: [
           @foreach($total_mensual_kg as $total)
-            {{$total->total_sales}},
+            {{$total->total_sales/1000}},
           @endforeach
         ]},
       ]
