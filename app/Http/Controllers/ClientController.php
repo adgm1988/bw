@@ -53,8 +53,6 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-
-
         return view('pages.clients.record', compact('client'));
     }
     /**
@@ -65,7 +63,8 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        $origins = Origin::all();
+        return view('pages.clients.edit', compact('client','origins'));
     }
 
     /**
@@ -77,7 +76,12 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+
+        $client = Client::find($request->id_client);
+
+        $client->update($request->all());
+
+        return redirect('clients/'.$client->id_client);
     }
 
     /**

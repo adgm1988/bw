@@ -16,9 +16,9 @@
           </button>
         </a>
         <a href="#">
-          <button type="submit"  form="sale_form" class="btn btn-primary" >
+          <a class="btn btn-primary" href="{{url('/clients/edit/'.$client->id_client)}}">
             Editar
-          </button>
+          </a>
         </a>
       </div>
     </div>
@@ -48,6 +48,25 @@
             <div class="col-3">
               <label for="origin">Procedencia</label>
               <div>{{$client->origin->origin}}</div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-3">
+              <label for="social">Razón social</label>
+              <div>{{$client->social}}</div>
+            </div>
+            <div class='col-3'>
+              <label for="rfc">RFC</label>
+              <div>{{$client->rfc}}</div>
+            </div>
+            <div class="col-3">
+              <label for="fact_mail">Correo facturación</label>
+              <div>{{$client->fact_mail}}</div>
+            </div>
+            <div class="col-3">
+              <label for="credit">Días crédito</label>
+              <div>{{$client->credit}}</div>
             </div>
           </div>
           <br>
