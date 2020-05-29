@@ -166,8 +166,15 @@
               <div>{{$sale->date}}</div>
             </div>
             <div class="col-4">
-              <label for="note">Nota:</label>
-              <div>{{$sale->note}}</div>
+              <label for="expiration">Vencimiento</label>
+              <div class="{{$sale->color}} text-center" >{{ $sale->expiration}}</div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12">
+              <label for="notes">Notas:</label>
+              <div> {{$sale->note}}</div>
             </div>
           </div>
           <br>

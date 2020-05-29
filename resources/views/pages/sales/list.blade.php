@@ -36,7 +36,8 @@
                     <th>Fecha</th>
                     <th>Cliente</th>
                     <th>Monto</th>
-                    <th>Nota</th>
+                    <th>Saldo</th>
+                    <th>Vencimiento</th>
                     <th>Creación</th>
                     <th>Edición</th>
                   </tr>
@@ -51,7 +52,8 @@
                   <td>{{$sale->date}}</td>
                   <td>{{$sale->client->name}}</td>
                   <td>$ {{number_format($sale->sale_details->sum('sale_price'))}}</td>
-                  <td>{{$sale->client->note}}</td>
+                  <td>$ {{number_format($sale->balance)}}</td>
+                  <td class='{{$sale->color}}' style='text-align:center;'>{{$sale->expiration}}</td>
                   <td>{{$sale->created_at}}</td>
                   <td>{{$sale->updated_at}}</td>
                 </tr>

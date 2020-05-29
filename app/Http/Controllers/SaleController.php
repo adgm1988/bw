@@ -72,7 +72,7 @@ class SaleController extends Controller
             ->pluck('inventory.id_product')->toArray();
         
         $products_detail = DB::table('products')
-                    ->whereIn('id_product', $id_products)->get(); 
+            ->whereIn('id_product', $id_products)->get(); 
 
         $product_categories = ProductCategory::all();
         $products = Product::all();
@@ -81,10 +81,9 @@ class SaleController extends Controller
         $payments = Payment::where('id_sale',$sale->id_sale)->get();
 
         $total_weight = DB::table('sale_details')
-        ->where('sale_details.id_sale','=',$sale->id_sale)
-        ->join('inventories','sale_details.id_inventory','inventories.id_inventory')
-        ->sum('inventories.weight');
-
+            ->where('sale_details.id_sale','=',$sale->id_sale)
+            ->join('inventories','sale_details.id_inventory','inventories.id_inventory')
+            ->sum('inventories.weight');
 
         return view('pages.sales.record', compact('sale','product_categories','products','sale_details','products_detail','products','total_weight','payment_types','payments'));
     }
