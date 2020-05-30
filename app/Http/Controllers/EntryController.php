@@ -132,8 +132,10 @@ class EntryController extends Controller
         $inventory = new Inventory;
         $inventory->id_product = $id_product;
         $inventory->weight = $weight;
+
         if($inventory->save()){
-            $id_inventory = $inventory->id;
+            
+            $id_inventory = $inventory->id_inventory;
 
             $entry_detail = new EntryDetail;
             $entry_detail->id_entry=$id_entry;
