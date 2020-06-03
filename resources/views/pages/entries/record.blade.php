@@ -145,8 +145,9 @@
                         @if($product->id_product == $entry_detail->inventory->id_product)
                           <li class="list-group-item col-12 p-0">
                             <div class="row">
-                              <div class="col-8 pl-5">00{{$entry_detail->inventory->id_inventory}} - {{$entry_detail->inventory->product->product}} </div>
-                              <div class="col-3 ">{{$entry_detail->inventory->weight}} gr</div>
+                              <div class="col-5 pl-5">00{{$entry_detail->inventory->id_inventory}} - {{$entry_detail->inventory->product->product}} </div>
+                              <div class="col-3 ">{{$entry_detail->inventory->weight}} gr</div> 
+                              <div class="col-3 ">${{$entry_detail->inventory->cost}}</div> 
                               <div class="col-1 "><a href={{ url('entries/deleteEntryDetail/'. $entry_detail->id_entry_detail)}}><i class="fas fa-minus-circle text-danger"></i></a></div>
                             </div>
                           </li>
