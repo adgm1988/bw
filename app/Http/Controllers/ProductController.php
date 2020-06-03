@@ -74,9 +74,19 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
-    {
-        //
+    public function update(Request $request)
+    {   
+
+        $product = Product::find($request->e_id_product);
+
+        $product->id_product_category = $request->e_id_product_category;
+        $product->product = $request->e_product;
+        $product->cost = $request->e_cost;
+
+        $product->save();
+
+        return redirect('products');
+
     }
 
     /**

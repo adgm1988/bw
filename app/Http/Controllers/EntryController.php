@@ -129,9 +129,12 @@ class EntryController extends Controller
         $id_entry = $request->id_entry;
         $weight = $request->weight;
 
+        $product_cost = Product::find($id_product)->get("cost");
+        dd($product_cost);
         $inventory = new Inventory;
         $inventory->id_product = $id_product;
         $inventory->weight = $weight;
+        $inventory->cost = $weight*$product_cost/100;
 
         if($inventory->save()){
             

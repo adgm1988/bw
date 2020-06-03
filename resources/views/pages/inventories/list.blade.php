@@ -34,6 +34,7 @@
                     <th>id</th>
                     <th>Producto</th>
                     <th>Peso (gr)</th>
+                    <th>costo</th>
                     <th>Precio</th>
                     <th>Creación</th>
                     <th>Edición</th>
@@ -48,6 +49,7 @@
                   <td>{{$inventory->id_inventory}}</td>
                   <td>{{$inventory->product->product}}</td>
                   <td>{{$inventory->weight}}</td>
+                  <td>{{$inventory->cost}}</td>
                   <td>$ {{($inventory->product->price)*$inventory->weight/100}}</td>
                   <td>{{$inventory->created_at}}</td>
                   <td>{{$inventory->updated_at}}</td>
