@@ -80,6 +80,7 @@ Route::post('origins/store','OriginController@store');
 
 Route::get('products','ProductController@index');
 Route::post('products/store','ProductController@store');
+Route::get('products/ajaxget/{product}','ProductController@getproduct');
 
 Route::get('product_categories','ProductCategoryController@index');
 Route::post('product_categories/store','ProductCategoryController@store');

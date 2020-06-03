@@ -89,4 +89,9 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function getproduct(Product $product)
+    {
+        return $product;
+    }
 }
