@@ -162,6 +162,8 @@ class EntryController extends Controller
     {
 
         $entry_detail = EntryDetail::find($entrydetail);
+        $inventory = Inventory::find($entry_detail->id_inventory);
+        $inventory->delete();
         $entry_detail->delete();
         return back(); 
         
