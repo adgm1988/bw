@@ -9,9 +9,11 @@ class Entry extends Model
     protected $guarded=[];
     protected $primaryKey = 'id_entry';
 
-    public function entry_detail() 
+    public function entry_details() 
     {
-    	$this->hasMany('App\EntryDetail','id_entry_detail','id_entry_detail');
+    	return $this->hasMany('App\EntryDetail','id_entry_detail','id_entry_detail');
     }
+
+   
 
 }

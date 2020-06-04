@@ -82,10 +82,15 @@ class EntryController extends Controller
                     ->join('inventories','inventories.id_inventory','entry_details.id_inventory')
                     ->sum('inventories.weight');
 
+        $total_cost = DB::table('entry_details')
+                    ->where('id_entry',$entry->id_entry)
+                    ->join('inventories','inventories.id_inventory','entry_details.id_inventory')
+                    ->sum('inventories.cost');
+
         $product_categories = ProductCategory::all();
         $products = Product::all();
 
-        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight'));
+        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight','total_cost'));
     }
 
     /**

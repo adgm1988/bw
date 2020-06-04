@@ -92,6 +92,10 @@
               <label for="date">Peso:</label>
               <h3>{{ $total_weight}} gr</h3>
             </div>
+            <div class="col-6">
+              <label for="date">Costo:</label>
+              <h3>$ {{ $total_cost }}</h3>
+            </div>
           </div>
         </div>
       </div>
