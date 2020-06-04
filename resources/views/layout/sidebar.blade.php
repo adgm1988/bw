@@ -88,7 +88,15 @@
             <a href="{{ url('payments') }}" class="nav-link">
               <i class="nav-icon fas fa-money-bill-wave"></i>
               <p>
-                Pagos
+                Pagos Clientes
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('entry_payments') }}" class="nav-link">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>
+                Pagos Proveedor
               </p>
             </a>
           </li>

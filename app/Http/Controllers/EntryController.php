@@ -7,6 +7,8 @@ use App\ProductCategory;
 use App\Product;
 use App\EntryDetail;
 use App\Inventory;
+use App\PaymentType;
+use App\EntryPayment;
 use DB;
 
 use Illuminate\Http\Request;
@@ -87,10 +89,13 @@ class EntryController extends Controller
                     ->join('inventories','inventories.id_inventory','entry_details.id_inventory')
                     ->sum('inventories.cost');
 
+        $payments = EntryPayment::where('id_entry',$entry->id_entry)->get();
+
         $product_categories = ProductCategory::all();
+        $payment_types = PaymentType::all();
         $products = Product::all();
 
-        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight','total_cost'));
+        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight','total_cost','payment_types','payments'));
     }
 
     /**
@@ -166,6 +171,32 @@ class EntryController extends Controller
         $inventory->delete();
         $entry_detail->delete();
         return back(); 
+        
+    }
+
+     public function ajaxPaymentStore(Request $request)
+    {
+
+        $payment = new EntryPayment;
+        $payment->id_entry=$request->id_entry;
+        $payment->amount = $request->amount;
+        $payment->date = $request->date;
+        $payment->id_payment_type=$request->id_payment_type;
+       
+
+        if( $payment->save()){
+                return response()->json(["response" =>true,"payment"=>$payment]);
+              }else{
+                return response()->json(["response" =>false,"payment"=>$payment]);
+            }
+    }
+
+    public function deletePayment($payment)
+    {
+
+        $payment = EntryPayment::find($payment);
+        $payment->delete();
+        return back();
         
     }
 

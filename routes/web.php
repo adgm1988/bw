@@ -55,6 +55,8 @@ Route::post('entries/store','EntryController@store');
 Route::get('entries/{entry}','EntryController@show');
 Route::post('entries/saveEntryDetail','EntryController@ajaxEntryDetailStore');
 Route::get('entries/deleteEntryDetail/{entry_detail}','EntryController@deleteEntryDetail');
+Route::post('entries/savePayment','EntryController@ajaxPaymentStore');
+Route::get('entries/deletePayment/{payment}','entryController@deletePayment');
 
 
 Route::get('adjusts','AdjustController@index');
@@ -72,6 +74,8 @@ Route::post('adjust_details/store/{id_inventory}','AdjustDetailController@store'
 Route::get('adjust_details/delete/{adjustDetail}','AdjustDetailController@destroy');
 
 Route::get('payments','PaymentController@index');
+
+Route::get('entry_payments','EntryPaymentController@index');
 
 
 //CATÁLOGOS

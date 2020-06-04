@@ -11,7 +11,12 @@ class Entry extends Model
 
     public function entry_details() 
     {
-    	return $this->hasMany('App\EntryDetail','id_entry_detail','id_entry_detail');
+    	return $this->hasMany('App\EntryDetail','id_entry','id_entry');
+    }
+
+    public function payments()
+    {
+    	return $this->hasMany('App\EntryPayments','id_entry','id_entry');
     }
 
    
