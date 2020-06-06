@@ -49,11 +49,11 @@
           <div class="row">
             <div class="col-6">
               <label for="costo">Costo:</label>
-              <input type="number" class="form-control" id="cost" name="cost">
+              <input type="number" step='0.01' class="form-control" id="cost" name="cost">
             </div>
             <div class="col-6">
               <label for="price">Precio:</label>
-              <input type="number" class="form-control" id="price" name="price">
+              <input type="number"  step='0.01' class="form-control" id="price" name="price">
             </div>
           </div>
 
@@ -99,11 +99,11 @@
           <div class="row">
             <div class="col-6">
               <label for="costo">Costo:</label>
-              <input type="number" class="form-control" id="cost" name="e_cost">
+              <input type="number" step='0.01' class="form-control" id="cost" name="e_cost">
             </div>
             <div class="col-6">
               <label for="price">Precio:</label>
-              <input type="number" class="form-control" id="price" name="e_price">
+              <input type="number" step='0.01' class="form-control" id="price" name="e_price">
             </div>
           </div>
 
