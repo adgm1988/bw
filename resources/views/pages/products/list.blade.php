@@ -28,7 +28,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <form action="{{url('products/store')}}" method="post">
+        <form action="{{url('products/store')}}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
 
           <div class="form-group row">
@@ -57,6 +57,21 @@
             </div>
           </div>
 
+
+          <div class="row">
+            <div class="col-12">
+              <label for="image">Imagen</label>
+              <input type="file" class="form-control" name="image" id="image">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <label for="color">Color</label>
+              <input type="color" class="form-control" name="color" id="color" value="#d9534f">
+            </div>
+          </div>
+
           <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-success">Guardar</button>
@@ -78,7 +93,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <form action="{{url('products/update')}}" method="post">
+        <form action="{{url('products/update')}}" method="post" enctype="multipart/form-data">
           {{ csrf_field() }}
           <input type="hidden" id="id_product" name="e_id_product" >
           <div class="form-group row">
@@ -104,6 +119,19 @@
             <div class="col-6">
               <label for="price">Precio:</label>
               <input type="number" step='0.01' class="form-control" id="price" name="e_price">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label for="image">Imagen</label>
+              <input type="file" name="e_image" id="e_image">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <label for="color">Color</label>
+              <input type="color" class="form-control" name="e_color" id="e_color" >
             </div>
           </div>
 
@@ -133,6 +161,7 @@
                     <th>Producto</th>
                     <th>Costo</th>
                     <th>Precio</th>
+                    <th>Imagen</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -143,9 +172,15 @@
                   </td>
                   <td>{{$product->id_product}}</td>
                   <td>{{$product->product_category->product_category}}</td>
-                  <td>{{$product->product}}</td>
+                  <td style="background-color:{{ $product->color }}" >{{$product->product}}</td>
                   <td>${{$product->cost}}</td>
                   <td>${{$product->price}}</td>
+                  <td>
+                    @if($product->image)
+                    <a target="_blank" href="<?php echo asset("storage/$product->image")?>"><img width="50px" src="<?php echo asset("storage/$product->image")?>"></img></a>
+                    @endif
+
+                  </td>
                 </tr>
                 @endforeach
               </table>
@@ -160,6 +195,7 @@
 @section('script')
    @include('generals.general_list_script')
    <script>
+
     var edit = function(id){
       var url_dir = "products/ajaxget/"+id;
       $.ajax({
@@ -177,6 +213,8 @@
           $('input[name=e_cost]').val(data.cost);
           $('input[name=e_price]').val(data.price);
           $("#e_id_product_category").val(data.id_product_category);
+          $("#e_image").val(data.image);
+          $("#e_color").val(data.color);
         }
         }
       });

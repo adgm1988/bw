@@ -236,7 +236,7 @@
                 <label>Productos</label>
                 <div class="row">
                   @foreach($products as $product)
-                  <div class="btn btn-danger products m-2 col-5" data-id_product="{{$product->id_product}}" data-product="{{$product->product}}"  data-price="{{$product->price}}" data-category="{{$product->id_product_category}}" style="width:100%">{{$product->product}}</div>
+                  <div style="background-color:{{ $product->color ? $product->color : "#d9534f" }}" class="btn btn-danger products m-2 col-5" data-id_product="{{$product->id_product}}" data-product="{{$product->product}}"  data-price="{{$product->price}}" data-category="{{$product->id_product_category}}" style="width:100%">{{$product->product}}</div>
                 @endforeach
                 </div>
               </div>
