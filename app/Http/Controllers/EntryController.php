@@ -89,13 +89,15 @@ class EntryController extends Controller
                     ->join('inventories','inventories.id_inventory','entry_details.id_inventory')
                     ->sum('inventories.cost');
 
-        $payments = EntryPayment::where('id_entry',$entry->id_entry)->get();
+
+
+        $balance = $total_cost-$entry->payments->sum('amount');
 
         $product_categories = ProductCategory::all();
         $payment_types = PaymentType::all();
         $products = Product::all();
 
-        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight','total_cost','payment_types','payments'));
+        return view('pages.entries.record', compact('entry','product_categories','products','entry_details','products_detail','products','total_weight','total_cost','payment_types','balance'));
     }
 
     /**

@@ -82,6 +82,7 @@ class ProductController extends Controller
         $product->id_product_category = $request->e_id_product_category;
         $product->product = $request->e_product;
         $product->cost = $request->e_cost;
+        $product->price = $request->e_price;
         $product->save();
 
         return redirect('products');

@@ -145,24 +145,32 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-4">
-              <label for="date">Peso:</label>
-              <h3>{{ $total_weight}} gr</h3>
+            <div class="col-3">
+              <label for="date">Peso (gr):</label>
+              <h4>{{ $total_weight}}</h4>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <label for="date">Costo:</label>
-              <h3>$ {{ $total_cost }}</h3>
+              <h4>$ {{ $total_cost }}</h4>
             </div>
-            <div class="col-4">
+            <div class="col-3">
               <label for="payments">Pagos:</label>
-              <h3>$ {{ $payments->sum('amount') }}</h3>
+              <h4>$ {{ $entry->payments->sum('amount') }}</h4>
+            </div>
+            <div class="col-3">
+              <label for="balance">Saldo:</label>
+              <h4>$ {{ $balance }}</h4>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-12">
               <ul class="list-group list-group-flush">
-                @foreach($payments as $payment)
+                @foreach($entry->payments as $payment)
                 <li class="list-group-item col-12 p-0">
                   <div class="row">
                     <div class="col-5 ">{{$payment->payment_type->payment_type}}</div>

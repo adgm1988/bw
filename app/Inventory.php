@@ -24,7 +24,7 @@ class Inventory extends Model
 
     public function sale_details()
     {
-        return $this->belongsTo('App\SaleDetail','id_inventory','id_inventory');
+        return $this->hasOne('App\SaleDetail','id_inventory','id_inventory');
     }
 
     public function adjust_details()

@@ -14,10 +14,20 @@ class Entry extends Model
     	return $this->hasMany('App\EntryDetail','id_entry','id_entry');
     }
 
+    public function inventory(){
+        return $this->hasOneThrough('App\Inventory','App\EntryDetail','id_entry','id_entry_detail','id_entry','id_inventory');
+    }
+
     public function payments()
     {
-    	return $this->hasMany('App\EntryPayments','id_entry','id_entry');
+    	return $this->hasMany('App\EntryPayment','id_entry','id_entry');
     }
+
+    public function getCost()
+    {
+        // return $this->
+    }
+
 
    
 
