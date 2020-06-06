@@ -23,10 +23,38 @@ class Entry extends Model
     	return $this->hasMany('App\EntryPayment','id_entry','id_entry');
     }
 
-    public function getCost()
+    public function getCostAttribute()
     {
-        // return $this->
+
+        $inventories =  $this->entry_details->pluck('id_inventory');
+        $cost = Inventory::whereIn('id_inventory',$inventories)->sum('cost');
+        return $cost;
     }
+
+    public function getBalanceAttribute()
+    {
+
+        $inventories =  $this->entry_details->pluck('id_inventory');
+        $cost = Inventory::whereIn('id_inventory',$inventories)->sum('cost');
+
+        return $cost-$this->payments->sum('amount');
+    }
+
+    public function getColorAttribute()
+    {
+
+        $inventories =  $this->entry_details->pluck('id_inventory');
+        $cost = Inventory::whereIn('id_inventory',$inventories)->sum('cost');
+
+        $balance =  $cost-$this->payments->sum('amount');
+
+        if($balance > 0){
+            return "bg-danger";
+        }else{
+            return "bg-success";
+        }
+    }
+
 
 
    

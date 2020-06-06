@@ -34,6 +34,8 @@
                     <th></th>
                     <th>id</th>
                     <th>Fecha</th>
+                    <th>Costo</th>
+                    <th>Saldo</th>
                     <th>Nota</th>
                     <th>Creación</th>
                     <th>Edición</th>
@@ -47,6 +49,8 @@
                   </td>
                   <td>{{$entry->id_entry}}</td>
                   <td>{{$entry->date}}</td>
+                  <td>${{$entry->cost}}</td>
+                  <td class="{{ $entry->color }}">${{$entry->balance}}</td>
                   <td>{{$entry->note}}</td>
                   <td>{{$entry->created_at}}</td>
                   <td>{{$entry->updated_at}}</td>

@@ -127,6 +127,7 @@
             <div class="col-4">
               <label for="date">Folio:</label>
               <div>E-{{$entry->id_entry}}</div>
+              <div>{{$entry->cost}}</div>
             </div>
             <div class="col-4">
               <label for="date">Fecha:</label>
